@@ -6,7 +6,8 @@ import session from "express-session";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 import crypto from "crypto";
-import {getDb} from "./db.js";
+import {getDb} from "./db/database.js";
+import {router as gameRoutes} from "./routes/gameRoutes.js";
 
 // init express
 const app = new express();
@@ -44,7 +45,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // TODO: add passport logic
-// TODO: add routes
+
+// routes
+app.use("/api/games", gameRoutes);
 
 const startServer = async () => {
   // connect to the database

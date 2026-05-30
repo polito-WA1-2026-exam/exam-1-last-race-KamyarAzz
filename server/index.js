@@ -5,9 +5,8 @@ import cors from "cors";
 import session from "express-session";
 import passport from "passport";
 import LocalStrategy from "passport-local";
-import sqlite3 from "sqlite3";
-import {open} from "sqlite";
 import crypto from "crypto";
+import {getDb} from "./db.js";
 
 // init express
 const app = new express();
@@ -24,16 +23,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// connect the database
-let db;
-async function initDb() {
-  db = await open({
-    filename: "./db/database.sqlite",
-    driver: sqlite3.Database,
-  });
-  console.log("Connected to the SQLite database.");
-}
-initDb().catch((err) => console.error("Failed to connect to db:", err));
+// connect the db
 
 // creates cookie
 app.use(
@@ -56,7 +46,14 @@ app.use(passport.session());
 // TODO: add passport logic
 // TODO: add routes
 
-// activate the server
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
-});
+const startServer = async () => {
+  // connect to the database
+  await getDb();
+
+  // activate the server
+  app.listen(port, () => {
+    console.log(`Server listening at http://localhost:${port}`);
+  });
+};
+
+startServer();

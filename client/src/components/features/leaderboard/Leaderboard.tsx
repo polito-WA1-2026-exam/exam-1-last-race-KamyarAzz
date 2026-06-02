@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import {AxiosError} from "axios";
-import {api} from "../api/axios";
-import Loading from "./ui/Loading";
+import {api} from "../../../api/axios";
+import Loading from "../../ui/Loading";
 
 type LeaderboardItem = {
   username: string;
@@ -39,21 +39,22 @@ export default function Leaderboard() {
   }, []);
 
   return (
-    <div className="border h-full rounded-xl gap-2 min-w-75 p-4 flex flex-col">
-      <h2 className="text-center border-b pb-2">Leaderboard</h2>
+    <div className="border h-full rounded-xl gap-2 min-w-75 p-4 flex flex-col overflow-auto">
+      <h2 className="pb-2">🏆 Top Players</h2>
       {loading ? (
         <div className="w-full h-full flex items-center justify-center">
           <Loading />
         </div>
       ) : error ? (
         <p className="text-red-500">{error}</p>
+      ) : leaderboard.length === 0 ? (
+        <p className="text-center">No players found.</p>
       ) : (
         leaderboard.map((player, i) => (
-          <div
-            className="border flex rounded-lg justify-between p-2 gap-8"
-            key={i}
-          >
-            <p>Username: {player.username}</p>
+          <div className="border-b flex justify-between p-2 gap-8" key={i}>
+            <p>
+              {i + 1}. {player.username}
+            </p>
             <p>Score: {player.bestScore}</p>
           </div>
         ))

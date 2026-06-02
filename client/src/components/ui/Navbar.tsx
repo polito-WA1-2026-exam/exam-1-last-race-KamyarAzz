@@ -5,10 +5,11 @@ type Props = {};
 
 export default function Navbar({}: Props) {
   return (
-    <nav className="px-6 py-4 border-b">
+    <nav className="px-6 py-4 border-b flex justify-between">
       <Link className="text-2xl font-bold text-white" to="/home">
         Last Run
       </Link>
+      <p className="hover:text-white cursor-pointer">Logout</p>
     </nav>
   );
 }

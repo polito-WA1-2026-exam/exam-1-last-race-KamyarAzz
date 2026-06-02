@@ -24,7 +24,7 @@ export default function Instructions({}: Props) {
   ];
 
   return (
-    <div className="h-full w-full gap-2 min-w-75 p-4 flex flex-col">
+    <div className="w-full gap-2 min-w-75 flex flex-col">
       <h2 className="pb-2">📖 How to Play</h2>
       <div className="flex flex-col gap-5">
         {instructions.map((instruction, index) => (

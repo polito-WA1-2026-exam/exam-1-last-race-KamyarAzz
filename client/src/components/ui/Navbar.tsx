@@ -9,7 +9,7 @@ export default function Navbar({}: Props) {
       <Link className="text-2xl font-bold text-white" to="/home">
         Last Run
       </Link>
-      <p className="hover:text-white cursor-pointer">Logout</p>
+      <p className="hover:underline text-white cursor-pointer">Logout</p>
     </nav>
   );
 }

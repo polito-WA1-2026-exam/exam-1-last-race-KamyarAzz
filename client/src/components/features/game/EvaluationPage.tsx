@@ -1,7 +1,3 @@
-import React from "react";
-
-type Props = {};
-
-export default function EvaluationPage({}: Props) {
+export default function EvaluationPage() {
   return <div>EvaluationPage</div>;
 }

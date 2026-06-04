@@ -1,9 +1,6 @@
-import React from "react";
 import InstructionItem from "./InstructionItem";
 
-type Props = {};
-
-export default function Instructions({}: Props) {
+export default function Instructions() {
   const instructions = [
     {
       title: "Study the underground network.",

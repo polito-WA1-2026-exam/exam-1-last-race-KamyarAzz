@@ -1,12 +1,8 @@
-import React from "react";
-import Loading from "../../ui/Loading";
 import Leaderboard from "../leaderboard/Leaderboard";
 import Instructions from "../instructions/Instructions";
 import {Link} from "react-router";
 
-type Props = {};
-
-export default function Home({}: Props) {
+export default function Home() {
   return (
     <div className="w-full h-full flex justify-between gap-4">
       <div className="w-full h-full flex flex-col items-start p-4 gap-8">

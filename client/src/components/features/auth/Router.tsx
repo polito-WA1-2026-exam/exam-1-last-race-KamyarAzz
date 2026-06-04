@@ -8,9 +8,7 @@ import InstructionsPage from "../instructions/InstructionsPage";
 import WrongRoutePage from "./WrongRoutePage";
 import EvaluationPage from "../game/EvaluationPage";
 
-type Props = {};
-
-export default function Router({}: Props) {
+export default function Router() {
   //   const isLoggedIn = document.cookie.includes("token=");
   const isLoggedIn = true;
 

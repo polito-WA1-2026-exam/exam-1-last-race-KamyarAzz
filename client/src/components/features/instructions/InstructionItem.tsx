@@ -1,5 +1,3 @@
-import React from "react";
-
 type Props = {
   i: number;
   title: string;

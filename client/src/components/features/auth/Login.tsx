@@ -1,5 +1,5 @@
 import {Link} from "react-router";
-import StationElement from "../ui/StationElement";
+import StationElement from "../../ui/StationElement";
 
 export default function Login() {
   return (

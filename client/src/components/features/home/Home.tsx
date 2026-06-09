@@ -8,7 +8,7 @@ export default function Home() {
       <div className="w-full h-full flex flex-col items-start p-4 gap-8">
         <Instructions />
         <Link
-          className="w-min min-w-50 text-center bg-indigo-800 hover:bg-indigo-700 duration-150 text-white p-2 rounded"
+          className="w-min min-w-50 text-center bg-blue-800 hover:bg-blue-700 duration-150 text-white p-2 rounded"
           to="/game/setup"
         >
           Play

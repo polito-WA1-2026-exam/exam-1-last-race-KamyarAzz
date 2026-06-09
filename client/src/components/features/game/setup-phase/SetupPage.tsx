@@ -25,7 +25,7 @@ export default function SetupPage() {
           start button.
         </p>
         <Link
-          className="w-min min-w-50 text-center mt-2 bg-indigo-800 hover:bg-indigo-700 duration-150 text-white p-2 rounded"
+          className="w-min min-w-50 text-center mt-2 bg-blue-800 hover:bg-blue-700 duration-150 text-white p-2 rounded"
           to="/game/planning"
         >
           Start

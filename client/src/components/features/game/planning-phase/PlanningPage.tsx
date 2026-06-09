@@ -1,6 +1,6 @@
 import {Link, useNavigate} from "react-router";
 import Timer from "../Timer";
-import stationsMap from "../../../../assets/stations.png";
+import stationsMap from "../../../../assets/network.png";
 import {useEffect, useState} from "react";
 import {AxiosError} from "axios";
 import {api} from "../../../../api/axios";
@@ -43,6 +43,10 @@ export default function PlanningPage() {
     fetchNetwork();
   }, []);
 
+  const submit = async () => {
+    navigate("/game/execution");
+  };
+
   return loading ? (
     <div className="w-full h-full items-center justify-center flex">
       <Loading />
@@ -53,6 +57,10 @@ export default function PlanningPage() {
     <div className="w-full h-full flex flex-col gap-4 min-h-0">
       <div className="flex w-full items-center gap-8">
         <h2>2. Planning Phase</h2>
+        <div className="flex gap-2 items-center">
+          <p>Time left:</p>
+          <Timer seconds={90} onTimeout={timeoutHandler} />
+        </div>
       </div>
       <div className="flex gap-4 justify-between flex-1 w-full min-h-0">
         <div className="flex flex-col justify-between items-center w-2/5">
@@ -63,10 +71,6 @@ export default function PlanningPage() {
             <p>
               Destination Station: <b>ToDo</b>
             </p>
-            <div className="flex gap-2 items-center">
-              <p>Time left:</p>
-              <Timer seconds={90} onTimeout={timeoutHandler} />
-            </div>
           </div>
           <img
             className="w-full rounded-md"
@@ -78,12 +82,12 @@ export default function PlanningPage() {
           <GameRoutesContainer segments={network.segments} />
         </div>
       </div>
-      <Link
-        className="w-min min-w-50 text-center bg-indigo-800 hover:bg-indigo-700 duration-150 text-white p-2 rounded"
-        to="/game/evaluation"
+      <button
+        className="w-min cursor-pointer min-w-50 text-center bg-blue-800 hover:bg-blue-700 duration-150 text-white p-2 rounded"
+        onClick={submit}
       >
         Finish
-      </Link>
+      </button>
     </div>
   );
 }

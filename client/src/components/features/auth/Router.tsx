@@ -6,7 +6,8 @@ import PlanningPage from "../game/planning-phase/PlanningPage";
 import AppLayout from "../../ui/AppLayout";
 import InstructionsPage from "../instructions/InstructionsPage";
 import WrongRoutePage from "./WrongRoutePage";
-import EvaluationPage from "../game/EvaluationPage";
+import ExecutionPage from "../game/execution-phase/ExecutionPage";
+import ResultPage from "../game/result-phase/ResultPage";
 
 export default function Router() {
   //   const isLoggedIn = document.cookie.includes("token=");
@@ -30,7 +31,8 @@ export default function Router() {
         <Route path="/home" element={<Home />} />
         <Route path="/game/setup" element={<SetupPage />} />
         <Route path="/game/planning" element={<PlanningPage />} />
-        <Route path="/game/evaluation" element={<EvaluationPage />} />
+        <Route path="/game/execution" element={<ExecutionPage />} />
+        <Route path="/game/result" element={<ResultPage />} />
         <Route path="*" element={<WrongRoutePage />} />
       </Route>
     </Routes>

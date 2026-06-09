@@ -1,8 +1,8 @@
 import {Navigate, Route, Routes} from "react-router";
 import Login from "./Login";
 import Home from "../home/Home";
-import SetupPhase from "../game/SetupPhase";
-import PlanningPhase from "../game/PlanningPhase";
+import SetupPage from "../game/setup-phase/SetupPage";
+import PlanningPage from "../game/planning-phase/PlanningPage";
 import AppLayout from "../../ui/AppLayout";
 import InstructionsPage from "../instructions/InstructionsPage";
 import WrongRoutePage from "./WrongRoutePage";
@@ -28,8 +28,8 @@ export default function Router() {
       <Route path="/" element={<Navigate to="/home" replace />} />
       <Route element={<AppLayout />}>
         <Route path="/home" element={<Home />} />
-        <Route path="/game/setup" element={<SetupPhase />} />
-        <Route path="/game/planning" element={<PlanningPhase />} />
+        <Route path="/game/setup" element={<SetupPage />} />
+        <Route path="/game/planning" element={<PlanningPage />} />
         <Route path="/game/evaluation" element={<EvaluationPage />} />
         <Route path="*" element={<WrongRoutePage />} />
       </Route>

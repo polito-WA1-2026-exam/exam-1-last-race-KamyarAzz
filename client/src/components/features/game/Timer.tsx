@@ -29,7 +29,11 @@ export default function Timer({seconds, onTimeout}: TimerProps) {
   const remainingSeconds = timeLeft % 60;
 
   return (
-    <span className={timeLeft <= 10 ? "text-red-600" : "text-white"}>
+    <span
+      className={
+        timeLeft <= 10 ? "text-red-600 font-bold" : "text-white font-bold"
+      }
+    >
       {minutes}:{remainingSeconds.toString().padStart(2, "0")}
     </span>
   );

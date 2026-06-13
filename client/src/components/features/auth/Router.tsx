@@ -51,7 +51,7 @@ export default function Router() {
     <Routes>
       <Route path="/login" element={<Navigate to="/home" replace />} />
       <Route path="/" element={<Navigate to="/home" replace />} />
-      <Route element={<AppLayout />}>
+      <Route element={<AppLayout setIsLoggedIn={setIsLoggedIn} />}>
         <Route path="/home" element={<Home />} />
         <Route path="/game/setup" element={<SetupPage />} />
         <Route path="/game/planning" element={<PlanningPage />} />

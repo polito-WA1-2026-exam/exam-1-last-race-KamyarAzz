@@ -6,7 +6,7 @@ import {
   getRandomEvents,
   addToLeaderboard,
 } from "../controllers/gameController.js";
-import {isLoggedIn} from "../middleware/authMiddleware.js";
+import {isLoggedIn} from "../middlewares/auth.js";
 
 const router = express.Router();
 

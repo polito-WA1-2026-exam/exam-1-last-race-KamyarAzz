@@ -1,4 +1,6 @@
-export const login = async (req, res, next) => {
+import passport from "passport";
+
+const login = async (req, res, next) => {
   try {
     passport.authenticate("local", (err, user, info) => {
       if (err) return next(err);
@@ -17,7 +19,7 @@ export const login = async (req, res, next) => {
   }
 };
 
-export const logout = async (req, res, next) => {
+const logout = async (req, res, next) => {
   try {
     req.logout((err) => {
       if (err) return next(err);
@@ -28,7 +30,7 @@ export const logout = async (req, res, next) => {
   }
 };
 
-export const checkSession = async (req, res, next) => {
+const checkSession = async (req, res, next) => {
   try {
     if (req.isAuthenticated()) {
       return res.status(200).json(req.user);

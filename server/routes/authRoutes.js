@@ -1,5 +1,5 @@
 import express from "express";
-import passport from "../config/passport.js";
+import passport from "../middlewares/passport.js";
 import {login, logout, checkSession} from "../controllers/authControllers.js";
 
 const router = express.Router();

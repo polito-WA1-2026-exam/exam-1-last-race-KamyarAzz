@@ -8,6 +8,7 @@ import LocalStrategy from "passport-local";
 import crypto from "crypto";
 import {getDb} from "./db/database.js";
 import {router as gameRoutes} from "./routes/gameRoutes.js";
+import {router as authRoutes} from "./routes/authRoutes.js";
 
 // init express
 const app = new express();

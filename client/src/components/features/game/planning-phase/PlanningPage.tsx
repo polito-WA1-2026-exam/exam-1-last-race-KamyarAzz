@@ -1,6 +1,6 @@
 import {Link, useNavigate} from "react-router";
 import Timer from "../Timer";
-import stationsMap from "../../../../assets/network.png";
+import stationsMap from "../../../../assets/stations.png";
 import {useEffect, useState} from "react";
 import {AxiosError} from "axios";
 import {api} from "../../../../api/axios";

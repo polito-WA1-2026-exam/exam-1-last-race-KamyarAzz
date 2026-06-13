@@ -54,4 +54,21 @@ const getNetwork = async (req, res) => {
   }
 };
 
-export {getNetwork, getLeaderboard};
+const getRandomStations = async (req, res) => {
+  try {
+    const start = "test1";
+    const destination = "test2";
+
+    res.json({
+      start,
+      destination,
+    });
+  } catch (err) {
+    console.error("Get Random Stations Error:", err);
+    res.status(500).json({error: "Failed to get random stations"});
+  }
+};
+
+const getRandomEvents = async () => {};
+
+export {getNetwork, getLeaderboard, getRandomStations};

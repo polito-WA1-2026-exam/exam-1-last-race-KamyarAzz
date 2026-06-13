@@ -24,8 +24,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// connect the db
-
 // creates cookie
 app.use(
   session({
@@ -44,9 +42,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// TODO: add passport logic
-
 // routes
+app.use("/api/sessions", authRoutes);
 app.use("/api/games", gameRoutes);
 
 const startServer = async () => {

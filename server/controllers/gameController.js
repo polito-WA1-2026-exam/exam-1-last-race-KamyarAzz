@@ -1,4 +1,9 @@
-import {getRawNetworkData, getRawLeaderboard} from "../dao/gameDao.js";
+import {
+  getRawNetworkData,
+  getRawLeaderboard,
+  getRawEvents,
+  addGameScore,
+} from "../dao/gameDao.js";
 
 const getLeaderboard = async (req, res) => {
   try {
@@ -7,6 +12,14 @@ const getLeaderboard = async (req, res) => {
   } catch (err) {
     console.error("Leaderboard Error:", err);
     res.status(500).json({error: "Failed to fetch leaderboard"});
+  }
+};
+
+const addToLeaderboard = async (req, res) => {
+  try {
+  } catch (err) {
+    console.error("Add to leaderboard Error:", err);
+    res.status(500).json({error: "Failed to add to leaderboard"});
   }
 };
 
@@ -69,6 +82,33 @@ const getRandomStations = async (req, res) => {
   }
 };
 
-const getRandomEvents = async () => {};
+const getRandomEvents = async (req, res) => {
+  try {
+    const {length} = req.body;
 
-export {getNetwork, getLeaderboard, getRandomStations};
+    const events = await getRawEvents();
+
+    if (!length || length < 1) {
+      return res.status(400).json({
+        error: "Length must be a positive number",
+      });
+    }
+    const randomEvents = [];
+    for (let i = 0; i <= length; i++) {
+      const randomIndex = Math.floor(Math.random() * events.length);
+      randomEvents.push(events[randomIndex]);
+    }
+    res.status(200).json(randomEvents);
+  } catch (err) {
+    console.error("Get Random Events Error:", err);
+    res.status(500).json({error: "Failed to get random events"});
+  }
+};
+
+export {
+  getNetwork,
+  getLeaderboard,
+  getRandomStations,
+  getRandomEvents,
+  addToLeaderboard,
+};

@@ -24,4 +24,21 @@ const getRawNetworkData = async () => {
   return await db.all(query);
 };
 
-export {getRawNetworkData, getRawLeaderboard};
+const getRawEvents = async () => {
+  const db = await getDb();
+  const query = `
+    SELECT * FROM events
+  `;
+  return await db.all(query);
+};
+
+const addGameScore = async (user_id, score) => {
+  const db = await getDb();
+
+  return db.run("INSERT INTO games (user_id, score) VALUES (?, ?)", [
+    user_id,
+    score,
+  ]);
+};
+
+export {getRawNetworkData, getRawLeaderboard, getRawEvents, addGameScore};

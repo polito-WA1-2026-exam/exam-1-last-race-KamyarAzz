@@ -9,8 +9,22 @@ import Loading from "../../../ui/Loading";
 import GameRoutesContainer from "./GameRoutesContainer";
 import type {Network} from "../../../../types/network";
 
+type RandomStations = {
+  destination: string;
+  start: string;
+};
+
+const initialRandomStations = {
+  destination: "",
+  start: "",
+};
+
 export default function PlanningPage() {
   const [network, setNetwork] = useState<Network>();
+  const [randomStations, setRandomStations] = useState<RandomStations>(
+    initialRandomStations,
+  );
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,12 +34,14 @@ export default function PlanningPage() {
     navigate("/game/evaluation");
   };
 
-  const fetchNetwork = async () => {
+  const fetchGameConfig = async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await api.get("/games/network");
-      setNetwork(response.data);
+      const networkResponse = await api.get("/games/network");
+      const randomStationsResponse = await api.get("/games/random-stations");
+      setNetwork(networkResponse.data);
+      setRandomStations(randomStationsResponse.data);
     } catch (err) {
       if (err instanceof AxiosError) {
         const serverMessage = err.response?.data?.message;
@@ -40,7 +56,7 @@ export default function PlanningPage() {
   };
 
   useEffect(() => {
-    fetchNetwork();
+    fetchGameConfig();
   }, []);
 
   const submit = async () => {
@@ -66,10 +82,10 @@ export default function PlanningPage() {
         <div className="flex flex-col justify-between items-center w-2/5">
           <div className="flex flex-col gap-2 text-white w-full">
             <p>
-              Starting Station: <b>ToDo</b>
+              Starting Station: <b>{randomStations.start}</b>
             </p>
             <p>
-              Destination Station: <b>ToDo</b>
+              Destination Station: <b>{randomStations.destination}</b>
             </p>
           </div>
           <img

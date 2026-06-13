@@ -44,7 +44,7 @@ export default function GameRoutesContainer({segments}: Props) {
       <div className="rounded-md border p-2 flex-1 overflow-auto min-h-0">
         <h3 className="mb-2 font-bold">Your Route</h3>
         {chosenRoutes.length === 0 ? (
-          <p className="text-center">No route selected.</p>
+          <p className="text-center text-sm">No route selected.</p>
         ) : (
           <div className="gap-2 overflow-auto flex flex-col">
             {chosenRoutes.map((segment) => (

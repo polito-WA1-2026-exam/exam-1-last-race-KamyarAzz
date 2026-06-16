@@ -2,12 +2,19 @@ import {useState} from "react";
 import SegmentItem from "./SegmentItem";
 import type {Segment} from "../../../../types/network";
 
-type Props = {segments: Segment[]};
+type Props = {
+  segments: Segment[];
+  chosenRoutes: Segment[];
+  setChosenRoutes: React.Dispatch<React.SetStateAction<Segment[]>>;
+};
 
-export default function GameRoutesContainer({segments}: Props) {
+export default function GameRoutesContainer({
+  segments,
+  chosenRoutes,
+  setChosenRoutes,
+}: Props) {
   const [availableSegments, setAvailableSegments] =
     useState<Segment[]>(segments);
-  const [chosenRoutes, setChosenRoutes] = useState<Segment[]>([]);
 
   const isSameSegment = (a: Segment, b: Segment) => {
     return a.line === b.line && a.from === b.from && a.to === b.to;

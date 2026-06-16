@@ -26,7 +26,7 @@ export default function Router() {
       }
       setIsLoggedIn(true);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setIsLoggedIn(false);
     } finally {
       setLoading(false);

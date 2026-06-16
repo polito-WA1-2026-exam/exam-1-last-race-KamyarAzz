@@ -3,7 +3,7 @@ import {
   getLeaderboard,
   getNetwork,
   getRandomStations,
-  getRandomEvents,
+  validateRoute,
   addToLeaderboard,
 } from "../controllers/gameController.js";
 import {isLoggedIn} from "../middlewares/auth.js";
@@ -14,6 +14,6 @@ router.get("/leaderboard", isLoggedIn, getLeaderboard);
 router.post("/leaderboard", isLoggedIn, addToLeaderboard);
 router.get("/network", isLoggedIn, getNetwork);
 router.get("/random-stations", isLoggedIn, getRandomStations);
-router.post("/random-events", isLoggedIn, getRandomEvents);
+router.post("/validate-route", isLoggedIn, validateRoute);
 
 export {router};

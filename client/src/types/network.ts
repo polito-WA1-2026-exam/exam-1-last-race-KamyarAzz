@@ -10,3 +10,5 @@ export type Network = {
   lines: Line;
   segments: Segment[];
 };
+
+export type GameEvent = {description: string; effect: number};

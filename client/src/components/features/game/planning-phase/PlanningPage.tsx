@@ -1,4 +1,4 @@
-import {Link, useNavigate} from "react-router";
+import {useNavigate} from "react-router";
 import Timer from "../Timer";
 import stationsMap from "../../../../assets/stations.png";
 import {useEffect, useState} from "react";
@@ -7,7 +7,14 @@ import {api} from "../../../../api/axios";
 import ErrorPage from "../../auth/ErrorPage";
 import Loading from "../../../ui/Loading";
 import GameRoutesContainer from "./GameRoutesContainer";
-import type {Network} from "../../../../types/network";
+import {useGameContext} from "../../../../context/GameContext";
+import type {Network, Segment} from "../../../../types/network";
+
+type SubmitPayload = {
+  start: string;
+  destination: string;
+  segments: Segment[];
+};
 
 type RandomStations = {
   destination: string;
@@ -27,11 +34,17 @@ export default function PlanningPage() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [chosenRoutes, setChosenRoutes] = useState<Segment[]>([]);
+  const {setGameState} = useGameContext();
 
   const navigate = useNavigate();
   const timeoutHandler = () => {
     alert("timeout");
-    navigate("/game/evaluation");
+    submit({
+      start: randomStations.start,
+      destination: randomStations.destination,
+      segments: chosenRoutes,
+    });
   };
 
   const fetchGameConfig = async () => {
@@ -59,8 +72,33 @@ export default function PlanningPage() {
     fetchGameConfig();
   }, []);
 
-  const submit = async () => {
-    navigate("/game/execution");
+  const submit = async (payload: SubmitPayload) => {
+    try {
+      const response = await api.post("/games/validate-route", payload);
+      const gameData = response.data;
+
+      setGameState({
+        selectedSegments: chosenRoutes,
+        events: gameData.events ?? [],
+        baseCoin: gameData.baseCoins ?? 0,
+        finalCoins: gameData.finalCoins ?? 0,
+        reason: gameData.reason ?? "",
+      });
+
+      if (gameData.valid) {
+        navigate("/game/execution");
+      } else {
+        navigate("/game/result");
+      }
+      return gameData;
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        const serverMessage =
+          err.response?.data?.error || err.response?.data?.message;
+        throw new Error(serverMessage || "Failed to submit.");
+      }
+      throw new Error("An unexpected error occurred during submition.");
+    }
   };
 
   return loading ? (
@@ -95,14 +133,24 @@ export default function PlanningPage() {
           />
         </div>
         <div className="flex flex-col gap-2 items-center w-3/5 min-h-0">
-          <GameRoutesContainer segments={network.segments} />
+          <GameRoutesContainer
+            chosenRoutes={chosenRoutes}
+            setChosenRoutes={setChosenRoutes}
+            segments={network.segments}
+          />
         </div>
       </div>
       <button
         className="w-min cursor-pointer min-w-50 text-center bg-blue-800 hover:bg-blue-700 duration-150 text-white p-2 rounded"
-        onClick={submit}
+        onClick={() =>
+          submit({
+            start: randomStations.start,
+            destination: randomStations.destination,
+            segments: chosenRoutes,
+          })
+        }
       >
-        Finish
+        Continue
       </button>
     </div>
   );

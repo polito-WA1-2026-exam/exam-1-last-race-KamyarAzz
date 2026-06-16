@@ -5,7 +5,6 @@ import Timer from "../Timer";
 export default function SetupPage() {
   const navigate = useNavigate();
   const timeoutHandler = () => {
-    alert("Timeout! You have been redirected to Planning Phase.");
     navigate("/game/planning");
   };
 

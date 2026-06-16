@@ -39,7 +39,6 @@ export default function PlanningPage() {
 
   const navigate = useNavigate();
   const timeoutHandler = () => {
-    alert("timeout");
     submit({
       start: randomStations.start,
       destination: randomStations.destination,

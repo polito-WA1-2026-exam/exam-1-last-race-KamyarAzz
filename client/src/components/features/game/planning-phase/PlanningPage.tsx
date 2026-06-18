@@ -116,7 +116,7 @@ export default function PlanningPage() {
         </div>
       </div>
       <div className="flex flex-row gap-4 justify-between flex-1 w-full min-h-0 overflow-x-auto pb-2">
-        <div className="flex flex-col justify-between items-center min-w-[320px] max-w-140 flex-none min-h-0">
+        <div className="flex flex-col justify-between items-center min-w-80 max-w-140 flex-none min-h-0">
           <div className="flex flex-col gap-2 text-white w-full wrap-break-words overflow-hidden">
             <p className="wrap-break-words">
               Starting Station: <b>{randomStations.start}</b>
@@ -126,7 +126,7 @@ export default function PlanningPage() {
             </p>
           </div>
           <img
-            className="w-full rounded-md min-w-0 max-h-90 object-contain"
+            className="w-full rounded-md min-w-0 max-h-90 max-w-130 object-contain"
             src={stationsMap}
             alt="Stations Map"
           />

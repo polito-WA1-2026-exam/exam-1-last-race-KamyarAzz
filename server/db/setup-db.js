@@ -5,15 +5,9 @@ import crypto from "crypto";
 // Static data (Stations & Lines)
 const linesData = {
   Red: ["Central Hub", "Oak Street", "River Park", "North Gate"],
-  Blue: ["Central Hub", "East Market", "South Square", "Airport"],
+  Blue: ["Central Hub", "East Market", "Old Road", "South Square", "Airport"],
   Green: ["Oak Street", "East Market", "Hilltop", "University"],
-  Yellow: [
-    "North Gate",
-    "Tech District",
-    "South Square",
-    "Harbor Point",
-    "West End",
-  ],
+  Yellow: ["North Gate", "Tech District", "South Square", "Harbor Point"],
 };
 
 // Static data (Events)

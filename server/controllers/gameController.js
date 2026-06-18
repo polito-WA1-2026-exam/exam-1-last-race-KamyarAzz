@@ -146,10 +146,95 @@ const getNetwork = async (req, res) => {
   }
 };
 
+const buildAdjacencyList = (rawData) => {
+  const graph = {};
+  const lines = {};
+
+  rawData.forEach((row) => {
+    if (!lines[row.lineName]) {
+      lines[row.lineName] = [];
+    }
+    lines[row.lineName].push({
+      stationName: row.stationName,
+      stopNumber: row.stop_number,
+    });
+  });
+
+  // Initialize all stations
+  rawData.forEach((row) => {
+    if (!graph[row.stationName]) {
+      graph[row.stationName] = [];
+    }
+  });
+
+  // Build adjacency list from lines
+  for (const lineName in lines) {
+    const stations = lines[lineName]
+      .slice()
+      .sort((a, b) => a.stopNumber - b.stopNumber)
+      .map((item) => item.stationName);
+
+    for (let i = 0; i < stations.length - 1; i++) {
+      if (!graph[stations[i]].includes(stations[i + 1])) {
+        graph[stations[i]].push(stations[i + 1]);
+      }
+      if (!graph[stations[i + 1]].includes(stations[i])) {
+        graph[stations[i + 1]].push(stations[i]);
+      }
+    }
+  }
+
+  return graph;
+};
+
+const findStationsAtDistance = (graph, start, minDistance) => {
+  const distances = {[start]: 0};
+  const queue = [start];
+  let front = 0;
+
+  while (front < queue.length) {
+    const current = queue[front];
+    front++;
+
+    const neighbors = graph[current] || [];
+    for (const neighbor of neighbors) {
+      if (!(neighbor in distances)) {
+        distances[neighbor] = distances[current] + 1;
+        queue.push(neighbor);
+      }
+    }
+  }
+
+  return Object.entries(distances)
+    .filter(([station, distance]) => distance >= minDistance)
+    .map(([station]) => station);
+};
+
 const getRandomStations = async (req, res) => {
   try {
-    const start = "Central Hub";
-    const destination = "East Market";
+    const rawData = await getRawNetworkData();
+    const graph = buildAdjacencyList(rawData);
+    const allStations = Object.keys(graph);
+
+    if (allStations.length === 0) {
+      return res.status(500).json({error: "No stations available in network"});
+    }
+
+    // Randomly pick a starting station
+    const start = allStations[Math.floor(Math.random() * allStations.length)];
+
+    // Find all stations at least 3 segments away
+    const validDestinations = findStationsAtDistance(graph, start, 3);
+
+    if (validDestinations.length === 0) {
+      return res.status(500).json({
+        error: "No reachable destination at least 3 segments away from start",
+      });
+    }
+
+    // Randomly pick a destination from valid options
+    const destination =
+      validDestinations[Math.floor(Math.random() * validDestinations.length)];
 
     res.json({
       start,

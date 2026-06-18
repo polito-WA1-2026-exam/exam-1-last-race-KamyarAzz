@@ -11,6 +11,11 @@ export default function ResultPage() {
     navigate("/game/setup");
   };
 
+  const handleExit = () => {
+    resetGameState();
+    navigate("/home");
+  };
+
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-6 p-6 text-center">
       <div className="rounded-xl border-2 border-white/20 bg-slate-950/80 p-8 max-w-xl w-full">
@@ -31,12 +36,20 @@ export default function ResultPage() {
             <p className="text-red-100">{reason}</p>
           </div>
         )}
-        <button
-          className="cursor-pointer w-full bg-blue-800 hover:bg-blue-700 duration-150 text-white p-3 rounded"
-          onClick={handleNewGame}
-        >
-          Start a new game
-        </button>
+        <div className="flex gap-4">
+          <button
+            className="cursor-pointer w-full bg-blue-800 hover:bg-blue-700 duration-150 text-white p-3 rounded"
+            onClick={handleNewGame}
+          >
+            Start a new game
+          </button>
+          <button
+            className="cursor-pointer w-full bg-blue-800 hover:bg-blue-700 duration-150 text-white p-3 rounded"
+            onClick={handleExit}
+          >
+            Leaderboard
+          </button>
+        </div>
       </div>
     </div>
   );

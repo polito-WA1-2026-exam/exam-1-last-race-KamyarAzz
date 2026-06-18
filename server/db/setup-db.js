@@ -28,9 +28,9 @@ const eventsData = [
 
 // Static data (Users)
 const users = [
-  {username: "Alice", password: "password123"},
-  {username: "Bob", password: "password123"},
-  {username: "Charlie", password: "password123"},
+  {username: "alice", password: "password123"},
+  {username: "bob", password: "password123"},
+  {username: "charlie", password: "password123"},
 ];
 
 // Hashes the passwords using the crypto library
@@ -121,9 +121,9 @@ async function buildDatabase() {
   }
 
   // Seed (Games) (2 for Alice, 1 for Bob)
-  await db.run("INSERT INTO games (user_id, score) VALUES (?, ?)", [1, 25]);
+  await db.run("INSERT INTO games (user_id, score) VALUES (?, ?)", [1, 22]);
   await db.run("INSERT INTO games (user_id, score) VALUES (?, ?)", [1, 15]);
-  await db.run("INSERT INTO games (user_id, score) VALUES (?, ?)", [2, 30]);
+  await db.run("INSERT INTO games (user_id, score) VALUES (?, ?)", [2, 25]);
 
   // Seed Lines, Stations, & the Junction Table
   for (const [lineName, stationsArray] of Object.entries(linesData)) {

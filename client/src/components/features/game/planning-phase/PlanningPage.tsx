@@ -117,13 +117,15 @@ export default function PlanningPage() {
       </div>
       <div className="flex flex-row gap-4 justify-between flex-1 w-full min-h-0 overflow-x-auto pb-2">
         <div className="flex flex-col justify-between items-center min-w-80 max-w-140 flex-none min-h-0">
-          <div className="flex flex-col gap-2 text-white w-full wrap-break-words overflow-hidden">
-            <p className="wrap-break-words">
-              Starting Station: <b>{randomStations.start}</b>
-            </p>
-            <p className="wrap-break-words">
+          <div className="flex gap-2 items-center text-white w-full wrap-break-words overflow-hidden">
+            <div className="wrap-break-words flex-1 flex flex-col gap-2 border p-2 text-center rounded-md border-green-600 bg-green-800">
+              <span>Start</span>
+              <b>{randomStations.start}</b>
+            </div>
+            <p>→</p>
+            <div className="wrap-break-words flex-1 flex flex-col gap-2 border p-2 text-center rounded-md border-red-600 bg-red-800">
               Destination Station: <b>{randomStations.destination}</b>
-            </p>
+            </div>
           </div>
           <img
             className="w-full rounded-md min-w-0 max-h-90 max-w-130 object-contain"
@@ -140,7 +142,7 @@ export default function PlanningPage() {
         </div>
       </div>
       <button
-        className="w-min cursor-pointer min-w-50 text-center bg-blue-800 hover:bg-blue-700 duration-150 text-white p-2 rounded"
+        className="w-min mx-auto cursor-pointer min-w-70 text-center bg-blue-800 hover:bg-blue-700 duration-150 text-white p-2 rounded"
         onClick={() =>
           submit({
             start: randomStations.start,

@@ -59,9 +59,9 @@
 
 ## Users Credentials
 
-- Alice, password123
-- Bob, password123
-- Charlie, password123
+- alice, password123
+- bob, password123
+- charlie, password123
 
 ## Use of AI Tools
 

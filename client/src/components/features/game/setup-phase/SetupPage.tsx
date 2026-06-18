@@ -17,7 +17,11 @@ export default function SetupPage() {
           <Timer seconds={10} onTimeout={timeoutHandler} />
         </div>
       </div>
-      <img className="w-2/5 rounded-md" src={networkMap} alt="Stations Map" />
+      <img
+        className="w-2/5 min-w-125 rounded-md"
+        src={networkMap}
+        alt="Stations Map"
+      />
       <div className="flex flex-col gap-2 items-center">
         <p>
           Memorize the stations and connections. When you are ready, click the

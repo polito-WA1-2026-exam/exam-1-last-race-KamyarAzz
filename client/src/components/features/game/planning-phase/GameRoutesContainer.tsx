@@ -35,10 +35,10 @@ export default function GameRoutesContainer({
   };
 
   return (
-    <div className="w-full h-full flex gap-4 text-white ">
-      <div className="rounded-md border p-2 flex-2 overflow-auto min-h-0">
+    <div className="w-full h-full flex gap-4 text-white min-h-0 min-w-0 overflow-auto">
+      <div className="rounded-md border p-2 flex-none min-w-[320px] max-w-140 overflow-auto min-h-0">
         <h3 className="mb-2 font-bold">Available Segments</h3>
-        <div className="gap-2 overflow-auto grid grid-cols-2">
+        <div className="gap-2 overflow-auto grid grid-cols-1 sm:grid-cols-2 min-w-0">
           {availableSegments.map((segment) => (
             <SegmentItem
               clickHandler={addSegment}
@@ -48,12 +48,12 @@ export default function GameRoutesContainer({
           ))}
         </div>
       </div>
-      <div className="rounded-md border p-2 flex-1 overflow-auto min-h-0">
+      <div className="rounded-md border p-2 flex-none min-w-[320px] max-w-140 overflow-auto min-h-0">
         <h3 className="mb-2 font-bold">Your Route</h3>
         {chosenRoutes.length === 0 ? (
           <p className="text-center text-sm">No route selected.</p>
         ) : (
-          <div className="gap-2 overflow-auto flex flex-col">
+          <div className="gap-2 overflow-auto flex flex-col min-w-0">
             {chosenRoutes.map((segment) => (
               <SegmentItem
                 clickHandler={removeSegment}

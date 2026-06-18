@@ -115,23 +115,23 @@ export default function PlanningPage() {
           <Timer seconds={90} onTimeout={timeoutHandler} />
         </div>
       </div>
-      <div className="flex gap-4 justify-between flex-1 w-full min-h-0">
-        <div className="flex flex-col justify-between items-center w-2/5">
-          <div className="flex flex-col gap-2 text-white w-full">
-            <p>
+      <div className="flex flex-row gap-4 justify-between flex-1 w-full min-h-0 overflow-x-auto pb-2">
+        <div className="flex flex-col justify-between items-center min-w-[320px] max-w-140 flex-none min-h-0">
+          <div className="flex flex-col gap-2 text-white w-full wrap-break-words overflow-hidden">
+            <p className="wrap-break-words">
               Starting Station: <b>{randomStations.start}</b>
             </p>
-            <p>
+            <p className="wrap-break-words">
               Destination Station: <b>{randomStations.destination}</b>
             </p>
           </div>
           <img
-            className="w-full rounded-md"
+            className="w-full rounded-md min-w-0 max-h-90 object-contain"
             src={stationsMap}
             alt="Stations Map"
           />
         </div>
-        <div className="flex flex-col gap-2 items-center w-3/5 min-h-0">
+        <div className="flex flex-col gap-2 items-center min-w-90 flex-none min-h-0">
           <GameRoutesContainer
             chosenRoutes={chosenRoutes}
             setChosenRoutes={setChosenRoutes}
@@ -149,7 +149,7 @@ export default function PlanningPage() {
           })
         }
       >
-        Continue
+        Submit
       </button>
     </div>
   );

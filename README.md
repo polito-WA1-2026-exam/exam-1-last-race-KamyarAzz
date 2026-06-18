@@ -1,24 +1,43 @@
-# Exam #N: "Exam Title"
-## Student: s123456 LASTNAME FIRSTNAME 
+# Exam #1: "Last Race"
+
+## Student: s358708 Azizi Kamyar
 
 ## React Client Application Routes
 
-- Route `/`: page content and purpose
-- Route `/something/:param`: page content and purpose, param specification
-- ...
+- Route `/login`: page content and purpose
+- Route `/instructions`: page content and purpose
+- Route `/home`: page content and purpose (protected route)
+- Route `/game/setup`: page content and purpose (protected route)
+- Route `/game/planning`: page content and purpose (protected route)
+- Route `/game/execution`: page content and purpose (protected route)
+- Route `/game/result`: page content and purpose (protected route)
 
 ## API Server
 
-- POST `/api/something`
+- POST `/api/sessions`
   - request parameters and request body content
   - response body content
-- GET `/api/something`
-  - request parameters
-  - response body content
-- POST `/api/something`
+- DELETE `/api/sessions/current`
   - request parameters and request body content
   - response body content
-- ...
+- GET `/api/sessions/current`
+  - request parameters and request body content
+  - response body content
+- GET `/api/games/leaderboard`
+  - request parameters and request body content
+  - response body content
+- GET `/api/games/network`
+  - request parameters and request body content
+  - response body content
+- GET `/api/games/random-stations`
+  - request parameters and request body content
+  - response body content
+- POST `/api/games/validate-route`
+  - request parameters and request body content
+  - response body content
+- POST `/api/games/leaderboard`
+  - request parameters and request body content
+  - response body content
 
 ## Database Tables
 
@@ -40,9 +59,11 @@
 
 ## Users Credentials
 
-- username, password (plus any other requested info)
-- username, password (plus any other requested info)
+- Alice, password123
+- Bob, password123
+- Charlie, password123
 
 ## Use of AI Tools
+
 Briefly describe whether you used any AI tools (e.g., ChatGPT, GitHub Copilot, Claude) while working on this project, for which purposes (e.g., clarifying concepts, debugging, generating code), and how you verified or adapted their output.
 If you did not use any AI tools, simply state so.

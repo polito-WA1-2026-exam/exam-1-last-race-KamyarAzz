@@ -22,7 +22,6 @@ export default function GameRoutesContainer({
 
   const addSegment = (segment: Segment) => {
     setChosenRoutes((prev) => [...prev, segment]);
-
     setAvailableSegments((prev) =>
       prev.filter((s) => !isSameSegment(s, segment)),
     );
@@ -30,39 +29,51 @@ export default function GameRoutesContainer({
 
   const removeSegment = (segment: Segment) => {
     setChosenRoutes((prev) => prev.filter((s) => !isSameSegment(s, segment)));
-
     setAvailableSegments((prev) => [...prev, segment]);
   };
 
   return (
-    <div className="w-full h-full flex gap-4 text-white min-h-0 min-w-0 overflow-auto">
-      <div className="rounded-md border p-2 flex-none min-w-80 bg-slate-900 max-w-140 overflow-auto min-h-0">
-        <h3 className="mb-2 font-bold">Available Segments</h3>
-        <div className="gap-2 overflow-auto grid grid-cols-1 sm:grid-cols-2 min-w-0">
-          {availableSegments.map((segment) => (
-            <SegmentItem
-              clickHandler={addSegment}
-              key={`${segment.line}-${segment.from}-${segment.to}`}
-              segment={segment}
-            />
-          ))}
+    <div className="w-full h-full flex flex-col lg:flex-row gap-4 text-white min-h-0">
+      <div className="flex-1 flex flex-col rounded-xl border border-slate-700 bg-slate-900 min-h-75 lg:min-h-0 overflow-hidden shadow-lg">
+        <div className="bg-slate-800 p-3 border-b border-slate-700 shrink-0">
+          <h3 className="font-bold text-center">Available Segments</h3>
         </div>
-      </div>
-      <div className="rounded-md border p-2 flex-none min-w-67.5 bg-slate-900 max-w-140 overflow-auto min-h-0">
-        <h3 className="mb-2 font-bold">Your Route</h3>
-        {chosenRoutes.length === 0 ? (
-          <p className="text-center text-sm mt-2">No route selected.</p>
-        ) : (
-          <div className="gap-2 overflow-auto flex flex-col min-w-0">
-            {chosenRoutes.map((segment) => (
+        <div className="flex-1 overflow-y-auto p-3 custom-scrollbar">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
+            {availableSegments.map((segment) => (
               <SegmentItem
-                clickHandler={removeSegment}
+                clickHandler={addSegment}
                 key={`${segment.line}-${segment.from}-${segment.to}`}
                 segment={segment}
               />
             ))}
           </div>
-        )}
+        </div>
+      </div>
+
+      <div className="w-full lg:w-72 xl:w-80 shrink-0 flex flex-col rounded-xl border border-slate-700 bg-slate-900 min-h-75 lg:min-h-0 overflow-hidden shadow-lg">
+        <div className="bg-slate-800 p-3 border-b border-slate-700 shrink-0">
+          <h3 className="font-bold text-center">Your Route</h3>
+        </div>
+        <div className="flex-1 overflow-y-auto p-3 custom-scrollbar">
+          {chosenRoutes.length === 0 ? (
+            <div className="h-full flex items-center justify-center">
+              <p className="text-center text-sm text-slate-400">
+                No route selected.
+              </p>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-3">
+              {chosenRoutes.map((segment) => (
+                <SegmentItem
+                  clickHandler={removeSegment}
+                  key={`${segment.line}-${segment.from}-${segment.to}`}
+                  segment={segment}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

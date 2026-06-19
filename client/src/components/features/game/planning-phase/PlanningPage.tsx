@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router";
-import Timer from "../Timer";
+import Timer from "../timer/Timer";
 import stationsMap from "../../../../assets/stations.png";
 import {useEffect, useState} from "react";
 import {AxiosError} from "axios";
@@ -9,6 +9,7 @@ import Loading from "../../../ui/Loading";
 import GameRoutesContainer from "./GameRoutesContainer";
 import {useGameContext} from "../../../../context/GameContext";
 import type {Network, Segment} from "../../../../types/network";
+import TimerContainer from "../timer/TimerContainer";
 
 type SubmitPayload = {
   start: string;
@@ -38,6 +39,7 @@ export default function PlanningPage() {
   const {setGameState} = useGameContext();
 
   const navigate = useNavigate();
+
   const timeoutHandler = () => {
     submit({
       start: randomStations.start,
@@ -96,7 +98,7 @@ export default function PlanningPage() {
           err.response?.data?.error || err.response?.data?.message;
         throw new Error(serverMessage || "Failed to submit.");
       }
-      throw new Error("An unexpected error occurred during submition.");
+      throw new Error("An unexpected error occurred during submission.");
     }
   };
 
@@ -107,33 +109,37 @@ export default function PlanningPage() {
   ) : error || !network ? (
     <ErrorPage error={error} />
   ) : (
-    <div className="w-full h-full flex flex-col gap-4 min-h-0">
-      <div className="flex w-full items-center gap-8">
-        <h2>2. Planning Phase</h2>
-        <div className="flex gap-2 items-center">
-          <p>Time left:</p>
-          <Timer seconds={90} onTimeout={timeoutHandler} />
-        </div>
+    <div className="w-full h-full flex flex-col gap-4 p-4 min-h-0 box-border">
+      <div className="flex flex-col sm:flex-row justify-between w-full items-center gap-4">
+        <h2 className="text-xl font-bold">2. Planning Phase</h2>
+        <TimerContainer seconds={90} timeoutHandler={timeoutHandler} />
       </div>
-      <div className="flex flex-row gap-4 justify-between flex-1 w-full min-h-0 overflow-x-auto pb-2">
-        <div className="flex flex-col justify-between items-center min-w-80 max-w-140 flex-none min-h-0">
-          <div className="flex gap-2 items-center text-white w-full wrap-break-words overflow-hidden">
-            <div className="wrap-break-words flex-1 flex flex-col gap-2 border p-2 text-center rounded-md border-green-600 bg-green-800">
-              <span>Start</span>
-              <b>{randomStations.start}</b>
+      <div className="flex flex-col lg:flex-row gap-6 flex-1 w-full min-h-0 overflow-y-auto lg:overflow-hidden pb-2">
+        <div className="flex flex-col gap-4 w-full lg:w-2/5 xl:w-1/3 shrink-0 min-h-0">
+          <div className="flex flex-col sm:flex-row gap-2 items-stretch text-white w-full">
+            <div className="flex-1 flex flex-col justify-center items-center gap-1 border p-3 text-center rounded-lg border-green-600/40 bg-green-600/10 shadow-sm wrap-break-word">
+              <span className="text-xs uppercase tracking-wider opacity-80">
+                Start
+              </span>
+              <b className="text-lg">{randomStations.start}</b>
             </div>
-            <p>→</p>
-            <div className="wrap-break-words flex-1 flex flex-col gap-2 border p-2 text-center rounded-md border-red-600 bg-red-800">
-              Destination Station: <b>{randomStations.destination}</b>
+            <div className="hidden sm:flex items-center justify-center text-2xl font-bold text-gray-400">
+              →
+            </div>
+            <div className="flex-1 flex flex-col justify-center items-center gap-1 border p-3 text-center rounded-lg border-red-600/40 bg-red-600/10 shadow-sm wrap-break-word">
+              <span className="text-xs uppercase tracking-wider opacity-80">
+                Destination
+              </span>
+              <b className="text-lg">{randomStations.destination}</b>
             </div>
           </div>
           <img
-            className="w-full rounded-md min-w-0 max-h-90 max-w-130 object-contain"
+            className="w-full max-h-[40vh] lg:max-h-full rounded-md"
             src={stationsMap}
             alt="Stations Map"
           />
         </div>
-        <div className="flex flex-col gap-2 items-center min-w-90 flex-none min-h-0">
+        <div className="flex-1 min-w-0 min-h-0 flex flex-col">
           <GameRoutesContainer
             chosenRoutes={chosenRoutes}
             setChosenRoutes={setChosenRoutes}
@@ -141,18 +147,20 @@ export default function PlanningPage() {
           />
         </div>
       </div>
-      <button
-        className="w-min mx-auto cursor-pointer min-w-70 text-center bg-blue-800 hover:bg-blue-700 duration-150 text-white p-2 rounded"
-        onClick={() =>
-          submit({
-            start: randomStations.start,
-            destination: randomStations.destination,
-            segments: chosenRoutes,
-          })
-        }
-      >
-        Submit
-      </button>
+      <div className="mt-auto pt-2 flex justify-center shrink-0">
+        <button
+          className="w-full sm:w-auto min-w-50 cursor-pointer text-center bg-blue-600 hover:bg-blue-500 transition-colors text-white py-3 px-6 rounded-lg font-bold shadow-md"
+          onClick={() =>
+            submit({
+              start: randomStations.start,
+              destination: randomStations.destination,
+              segments: chosenRoutes,
+            })
+          }
+        >
+          Submit Route
+        </button>
+      </div>
     </div>
   );
 }

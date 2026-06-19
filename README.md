@@ -76,5 +76,5 @@
 
 ## Use of AI Tools
 
-Briefly describe whether you used any AI tools (e.g., ChatGPT, GitHub Copilot, Claude) while working on this project, for which purposes (e.g., clarifying concepts, debugging, generating code), and how you verified or adapted their output.
-If you did not use any AI tools, simply state so.
+I used ChatGPT a couple of times only for debugging assistance and clarifying technical concepts. The entire codebase and core logic was created entirely by me.
+I also verified all ChatGPT assisted debugging by manually reviewing the suggested fixes.

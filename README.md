@@ -65,8 +65,8 @@
 
 ## Screenshot
 
-![Screenshot](./img/home.png)
-![Screenshot](./img/home.png)
+![Screenshot](./img/leaderboard.png)
+![Screenshot](./img/game.png)
 
 ## Users Credentials
 

@@ -117,7 +117,7 @@ export default function PlanningPage() {
       <div className="flex flex-col lg:flex-row gap-6 flex-1 w-full min-h-0 overflow-y-auto lg:overflow-hidden pb-2">
         <div className="flex flex-col gap-4 w-full lg:w-2/5 xl:w-1/3 shrink-0 min-h-0">
           <div className="flex flex-col sm:flex-row gap-2 items-stretch text-white w-full">
-            <div className="flex-1 flex flex-col justify-center items-center gap-1 border p-3 text-center rounded-lg border-green-600/40 bg-green-600/10 shadow-sm wrap-break-word">
+            <div className="flex-1 flex flex-col justify-center items-center gap-1 border p-3 text-center rounded-lg border-green-600/50 bg-green-600/30 shadow-sm wrap-break-word">
               <span className="text-xs uppercase tracking-wider opacity-80">
                 Start
               </span>
@@ -126,7 +126,7 @@ export default function PlanningPage() {
             <div className="hidden sm:flex items-center justify-center text-2xl font-bold text-gray-400">
               →
             </div>
-            <div className="flex-1 flex flex-col justify-center items-center gap-1 border p-3 text-center rounded-lg border-red-600/40 bg-red-600/10 shadow-sm wrap-break-word">
+            <div className="flex-1 flex flex-col justify-center items-center gap-1 border p-3 text-center rounded-lg border-red-600/50 bg-red-600/30 shadow-sm wrap-break-word">
               <span className="text-xs uppercase tracking-wider opacity-80">
                 Destination
               </span>
